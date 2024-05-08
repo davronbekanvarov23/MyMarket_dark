@@ -7,23 +7,28 @@ const themes = {
   dracula: "dracula",
 };
 
-function themeFromLocalStorage() {
-  return localStorage.getItem("theme") || themes.winter;
-}
+let themeFromLocalStorage = () => {
+  return localStorage.getItem("theme")
+    ? localStorage.getItem("theme")
+    : themes.winter;
+};
 
 function Navbar() {
-    const [currentTheme, setCurrenttheme] = useState(themeFromLocalStorage());
+  const [currentTheme, setCurrenttheme] = useState(themeFromLocalStorage());
 
-    const handleMode = () => {
-      setCurrenttheme((prev) => {
-        return prev === themes.dracula ? themes.winter : themes.dracula;
-      });
-    };
+  const handleMode = (e) => {
+    if (e.target.checked) {
+      setCurrenttheme(themes.dracula);
+    } else {
+      setCurrenttheme(themes.winter);
+    }
+  };
 
-    useEffect(() => {
-      document.documentElement.setAttribute("data-theme", setCurrenttheme);
-      localStorage.setItem("theme", currentTheme);
-    }, [currentTheme]);
+  useEffect(() => {
+    localStorage.setItem("theme", currentTheme);
+    const localtheme = localStorage.getItem("theme");
+    document.documentElement.setAttribute("data-theme", localtheme);
+  }, [currentTheme]);
 
   return (
     <div className="bg-base-300  mb-10">
