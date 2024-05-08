@@ -26,7 +26,7 @@ function ProductsList({ products }) {
                    
                     <IoIosPricetags /> ${product.price}
                   </p>
-                  <Link to={`/product/${product.id}`} className="btn btn-primary">Buy Now</Link>
+                  <Link to={`/product/${product.id}`} className="btn btn-primary">Read More</Link>
                 </div>
               </div>
             </li>
